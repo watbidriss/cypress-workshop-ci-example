@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v2
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cache
@@ -15,7 +15,7 @@ jobs:
           key: dependencies-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies 📦
-        run: npm i
+        run: npm ci
 
       - name: Show Cypress info ℹ️
         run: npx cypress info
