@@ -6,10 +6,23 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v2
+        with:
+          path: |
+            ~/.cache
+            ~/.npm
+          # use key string with "v1" for simple cache invalidation
+          # use precise key to avoid cache "snowballing"
+          key: dependencies-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies 📦
         run: npm ci
 
+      - name: Show Cypress info ℹ️
+        run: npx cypress info
+
+      - name: Verify Cypress can run 🏃‍♂️
+        run: npx cypress verify
+        
       - name: Build the app 🏗
         run: npm run build
 
