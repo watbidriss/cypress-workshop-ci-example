@@ -15,7 +15,7 @@ jobs:
           key: dependencies-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies 📦
-        run: npm ci
+        run: npm i
 
       - name: Show Cypress info ℹ️
         run: npx cypress info
